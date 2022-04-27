@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Home</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="GroupMembers" content="2020A7PS0185H, 2020A7PS2067H, 2020A7PS1312H, 2020A7PS2084H">
+    <meta name="DBMS Project" content="CourtRoom Management">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Favicon icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <!-- <link rel="icon" href="https://appsrv1-147a1.kxcdn.com/dattaable/images/favicon.ico" type="image/x-icon"> -->
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/dattaable/fonts/fontawesome/css/fontawesome-all.min.css">
+    <!-- animation css -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/dattaable/plugins/animation/css/animate.min.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/dattaable/css/style.css">
+    <!-- Specific css-->
+
+</head>
+
+<body>
+    <!-- [ Pre-loader ] start -->
+        <!--<div class="loader-bg">
+            <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>    -->
+    
+    <!-- Top Bar -->
+
+    <!-- SideBar -->
+    <nav class="pcoded-navbar">
+        <div class="navbar-wrapper">
+            <div class="navbar-brand header-logo">
+                <!-- <a target="_blank" href="https://appseed.us/admin-dashboards/django-datta-able" class="b-brand"> -->
+                    <!-- <div class="b-bg"> -->
+                        <!-- <i class="feather icon-trending-up"></i> -->
+                    <!-- </div> -->
+                <a>
+                    <span class="b-title">Welcome Admin! </span>
+                </a>
+                <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+            </div>
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar">
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Navigation</label>
+                    </li>
+                    <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item  active ">
+                        <a href="http://127.0.0.1:8000/AdminDashboard" class="nav-link ">
+                            <span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Cases</span>
+                        </a>
+                    </li>
+                    <li data-username="Sample Page" class="nav-item ">
+                        <a href="http://127.0.0.1:8000/RemoveLawyers" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Remove Lawyer</span>
+                        </a>
+                    </li>
+                    <li data-username="Sample Page" class="nav-item ">
+                        <a href="http://127.0.0.1:8000/RemoveJudges" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Remove Judge</span>
+                        </a>
+                    </li>
+                    <li data-username="Disabled Menu" class="nav-item">
+                        <a href="" class="nav-link">
+                            <a href="http://127.0.0.1:8000/AdminDashboard" >
+                                <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Home</span>
+                            </a>
+                        </a>
+                    </li>
+                    <li data-username="Disabled Menu" class="nav-item">
+                        <a href="http://127.0.0.1:8000" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+
+                                <!-- add empty div or space -->
+
+                                <div class="col-xl-12 col-md-6">
+                                    <div class="card Recent-Users">
+                                        <div class="card-header">
+                                            <h5>Ongoing Cases</h5>
+                                        </div>
+                                        {% block opencases %}
+                                        <div class="card-block px-0 py-3">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        {% for case in Cases %}
+                                                            {% if not case.Verdict is defined and not case.Verdict|length %}
+                                                                <tr class="unread">
+                                                                    <td><img class="rounded-circle" style="width:40px;" src="https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg" alt="activity-user"></td>
+                                                                    <td>
+                                                                        <h6 class="mb-1">Case ID {{ case.CaseID }}</h6>
+                                                                        <p class="m-0">Case Type: {{ case.CaseType }}</p>
+                                                                        <p class="m-0">Case Info: {{ case.CaseInfo }}</p>
+                                                                        {% for lawyer in Lawyers %}
+                                                                            {% if case.DefenseLawyerEmail == lawyer %}
+                                                                                <p class="m-0">Case Defense Lawyer Email ID: {{ lawyer.Email }}</p>
+                                                                                <p class="m-0">Case Defense Lawyer Name: {{ lawyer.Name }}</p>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                        {% for lawyer in Lawyers %}
+                                                                            {% if case.ProsecutorLawyerEmail == lawyer %}
+                                                                                <p class="m-0">Case Prosecutor Lawyer Email ID: {{ lawyer.Email }}</p>
+                                                                                <p class="m-0">Case Prosecutor Lawyer Name: {{ lawyer.Name }}</p>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                        {% for client in Clients %}
+                                                                            {% if case.DefenseClientEmail == client %}
+                                                                                <p class="m-0">Case Defense Client Email ID: {{ client.Email }}</p>
+                                                                                <p class="m-0">Case Defense Client Name: {{ client.Name }}</p>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                        {% for client in Clients %}
+                                                                            {% if case.ProsecutorClientEmail == client %}
+                                                                                <p class="m-0">Case Prosecutor Client Email ID: {{ client.Email }}</p>
+                                                                                <p class="m-0">Case Prosecutor Client Name: {{ client.Name }}</p>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                    </td>
+                                                                   <!----<td><a href="#!" class="label theme-bg2 text-white f-12">Case Details</a></td>-->
+                                                                </tr>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        {% endblock %}
+                                    </div>
+                                </div>
+
+                                
+                                <!-- CLOSED CASES -->
+                                <div class="col-xl-12 col-md-6">
+                                    <div class="card Recent-Users">
+                                        <div class="card-header">
+                                            <h5>Closed Cases</h5>
+                                        </div>
+                                        {% block closedcases %}
+                                        <div class="card-block px-0 py-3">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        {% for case in Cases %}
+                                                            {% if case.Verdict is defined or case.Verdict|length %}
+                                                            <tr class="unread">
+                                                                <td><img class="rounded-circle" style="width:40px;" src="https://t3.ftcdn.net/jpg/01/65/63/94/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg" alt="activity-user"></td>
+                                                                <td>
+                                                                    <h6 class="mb-1">Case ID {{ case.CaseID }}</h6>
+                                                                    <p class="m-0">Case Type: {{ case.CaseType }}</p>
+                                                                    <p class="m-0">Case Info: {{ case.CaseInfo }}</p>
+                                                                    {% for lawyer in Lawyers %}
+                                                                            {% if case.DefenseLawyerEmail == lawyer %}
+                                                                                <p class="m-0">Case Defense Lawyer Email ID: {{ lawyer.Email }}</p>
+                                                                                <p class="m-0">Case Defense Lawyer Name: {{ lawyer.Name }}</p>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                        {% for lawyer in Lawyers %}
+                                                                            {% if case.ProsecutorLawyerEmail == lawyer %}
+                                                                                <p class="m-0">Case Prosecutor Lawyer Email ID: {{ lawyer.Email }}</p>
+                                                                                <p class="m-0">Case Prosecutor Lawyer Name: {{ lawyer.Name }}</p>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                        {% for judge in Judges %}
+                                                                            {% if case.JudgeEmail == judge %}
+                                                                                <p class="m-0">Case Judge Email ID: {{ judge.Email }}</p>
+                                                                                <p class="m-0">Case Judge Name: {{ judge.Name }}</p>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                        {% for client in Clients %}
+                                                                            {% if case.DefenseClientEmail == client %}
+                                                                                <p class="m-0">Case Defense Client Email ID: {{ client.Email }}</p>
+                                                                                <p class="m-0">Case Defense Client Name: {{ client.Name }}</p>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                        {% for client in Clients %}
+                                                                            {% if case.ProsecutorClientEmail == client %}
+                                                                                <p class="m-0">Case Prosecutor Client Email ID: {{ client.Email }}</p>
+                                                                                <p class="m-0">Case Prosecutor Client Name: {{ client.Name }}</p>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                    <p class="m-0">Case Verdict: {{ case.Verdict }}</p>
+                                                                </td>
+                                                                <!----<td><a href="#!" class="label theme-bg2 text-white f-12">Case Details</a></td>-->
+                                                            </tr>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        {% endblock %}
+                                    </div>
+                                </div>
+                                <!-- CLOSED CASES end -->
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Required Js -->
+    <script src="https://appsrv1-147a1.kxcdn.com/dattaable/js/vendor-all.min.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/dattaable/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- <script src="https://appsrv1-147a1.kxcdn.com/dattaable/js/pcoded.min.js"></script> -->
+    <!-- Specific js -->
+    <script src="temp.js"></script>
+
+</body>
+</html>
